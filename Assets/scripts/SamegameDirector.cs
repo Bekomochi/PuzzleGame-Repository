@@ -72,7 +72,7 @@ public class SamegameDirector : MonoBehaviour
             return;
         }
 
-        //タッチ開始～指を離すまで
+        //タッチ開始から指を離すまで
         if(Input.GetMouseButtonDown(0))//タッチ開始
         {
             GameObject hitCat = GetHitCat();
