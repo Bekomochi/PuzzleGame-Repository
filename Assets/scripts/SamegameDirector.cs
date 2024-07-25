@@ -75,7 +75,7 @@ public class SamegameDirector : MonoBehaviour
         //タッチ開始から指を離すまで
         if(Input.GetMouseButtonDown(0))//タッチ開始
         {
-            GameObject hitCat = GetHitCat();
+            GameObject hitCat = GetHitCat(false);
 
             //一度リストのネコをクリアする
             lineCats.Clear();
@@ -84,14 +84,23 @@ public class SamegameDirector : MonoBehaviour
             if(hitCat)
             {
                 lineCats.Add(hitCat);
+
+                hitCat.transform.localScale = new Vector3(2, 2, 2);
             }
+
         }
         else if(Input.GetMouseButton(0))//押したままの状態
         {
-            GameObject hitCat = GetHitCat();
+            GameObject hitCat = GetHitCat(true);
+
+            if(lineCats.Count>0)
+            {
+                Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                lineCats[0].transform.position = worldPoint;
+            }
 
             //当たり判定があったら
-            if(hitCat && lineCats.Count>0)
+            if (hitCat && lineCats.Count>0)
             {
                 //距離を測る
                 GameObject pre = lineCats[lineCats.Count - 1];
@@ -243,24 +252,38 @@ public class SamegameDirector : MonoBehaviour
     }
 
     //マウスポジションに当たり判定があったアイテムを返す
-    GameObject GetHitCat()
+    GameObject GetHitCat(bool iskeepPushing)
     {
         GameObject ret = null;
 
         //スクリーン座標からワールド座標に変換
         Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit2D = Physics2D.Raycast(worldPoint, Vector2.zero);
+        //RaycastHit2D hit2D = Physics2D.Raycast(worldPoint, Vector2.zero);
+        //RaycastHit2D hit = Physics2D.CircleCast(worldPoint,1, Vector2.zero);
+
+        RaycastHit2D raycastHit2D;
+
+        if (iskeepPushing)
+        {
+            RaycastHit2D hit = Physics2D.CircleCast(worldPoint, 0.3f, Vector2.zero);
+            raycastHit2D = hit;
+        }
+        else
+        {
+            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+            raycastHit2D = hit;
+        }
 
         //当たり判定があったら
-        if(hit2D)
+        if(raycastHit2D)
         {
             //当たり判定があったオブジェクトからSpriteRendererを取得
-            SpriteRenderer spriteRenderer = hit2D.collider.gameObject.GetComponent<SpriteRenderer>();
+            SpriteRenderer spriteRenderer = raycastHit2D.collider.gameObject.GetComponent<SpriteRenderer>();
 
             //画像が設定されていたら、ネコのピースと判定する
             if (spriteRenderer)
             {
-                ret = hit2D.collider.gameObject;
+                ret = raycastHit2D.collider.gameObject;
             }
         }
 
