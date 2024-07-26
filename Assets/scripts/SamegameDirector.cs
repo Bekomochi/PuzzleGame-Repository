@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class SamegameDirector : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class SamegameDirector : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;//ゲーム時間
     [SerializeField] GameObject finishPanel;//ゲーム終了時に出すパネル
     [SerializeField] GameObject retryButton;//ゲーム終了時に出すパネル
+    //[SerializeField] GameObject CatPoof;//爆発エフェクト
 
     //bgm,seに関する変数
     [SerializeField] AudioClip BublesSE;//ネコを消した時の音
@@ -84,6 +86,7 @@ public class SamegameDirector : MonoBehaviour
             if(hitCat)
             {
                 lineCats.Add(hitCat);
+                hitCat.GetComponent<SpriteRenderer>().DOColor(new Color(1f, 0, 0), 0.5f).SetLoops(-1, LoopType.Yoyo);
 
                 hitCat.transform.localScale = new Vector3(2, 2, 2);
             }
@@ -106,12 +109,15 @@ public class SamegameDirector : MonoBehaviour
                 GameObject pre = lineCats[lineCats.Count - 1];
                 float distance = Vector2.Distance(hitCat.transform.position, pre.transform.position);
 
-                //色で判定
+
+                //画像で判定
                 bool isSameColor = hitCat.GetComponent<SpriteRenderer>().sprite == pre.GetComponent<SpriteRenderer>().sprite;
 
                 //色が同じ&&リストに追加していない
                 if (isSameColor && !lineCats.Contains(hitCat))
                 {
+                    hitCat.GetComponent<SpriteRenderer>().DOColor(new Color(1f, 0, 0), 0.5f).SetLoops(-1, LoopType.Yoyo);
+
                     //ラインに追加
                     lineCats.Add(hitCat);
                 }
@@ -137,10 +143,10 @@ public class SamegameDirector : MonoBehaviour
             lineRenderer.positionCount = lineCats.Count;
 
             //ラインのポジション
-            for(int i=0;i<lineCats.Count;i++)
+            /*for(int i=0;i<lineCats.Count;i++)
             {
-                lineRenderer.SetPosition(i, lineCats[i].transform.position);
-            }
+                lineRenderer.SetPosition(i, lineCats[i].transform.position + new Vector3(0,0,1));
+            }*/
         }
     }
 
@@ -184,8 +190,11 @@ public class SamegameDirector : MonoBehaviour
             //削除する
             Destroy(item);
 
+            //爆発エフェクト生成
+            //CatPoof =Instantiate(GetComponent<GameObject>());
+
             //削除した分生成して、スコアを加算
-            SpawnItem(destroyItems.Count/4);
+            SpawnItem(destroyItems.Count/3);
             gameScore += destroyItems.Count * 10;
 
             //スコアの表示を更新
