@@ -18,7 +18,7 @@ public class SamegameDirector : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;//ゲーム時間
     [SerializeField] GameObject finishPanel;//ゲーム終了時に出すパネル
     [SerializeField] GameObject retryButton;//ゲーム終了時に出すパネル
-    //[SerializeField] GameObject CatPoof;//爆発エフェクト
+    [SerializeField] GameObject CatPoof;//爆発エフェクト
 
     //bgm,seに関する変数
     [SerializeField] AudioClip BublesSE;//ネコを消した時の音
@@ -37,6 +37,7 @@ public class SamegameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         /*全アイテム
          アイテムのプレハブが生成されるたびにリストに追加*/
         cats = new List<GameObject>();
@@ -74,8 +75,14 @@ public class SamegameDirector : MonoBehaviour
             return;
         }
 
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
         //タッチ開始から指を離すまで
-        if(Input.GetMouseButtonDown(0))//タッチ開始
+
+
+        if (Input.GetMouseButtonDown(0))//タッチ開始
         {
             GameObject hitCat = GetHitCat(false);
 
@@ -83,7 +90,7 @@ public class SamegameDirector : MonoBehaviour
             lineCats.Clear();
 
             //当たり判定があったらリストに追加
-            if(hitCat)
+            if (hitCat)
             {
                 lineCats.Add(hitCat);
                 hitCat.GetComponent<SpriteRenderer>().DOColor(new Color(1f, 0, 0), 0.5f).SetLoops(-1, LoopType.Yoyo);
@@ -92,23 +99,22 @@ public class SamegameDirector : MonoBehaviour
             }
 
         }
-        else if(Input.GetMouseButton(0))//押したままの状態
+        else if (Input.GetMouseButton(0))//押したままの状態
         {
             GameObject hitCat = GetHitCat(true);
 
-            if(lineCats.Count>0)
+            if (lineCats.Count > 0)
             {
                 Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 lineCats[0].transform.position = worldPoint;
             }
 
             //当たり判定があったら
-            if (hitCat && lineCats.Count>0)
+            if (hitCat && lineCats.Count > 0)
             {
                 //距離を測る
                 GameObject pre = lineCats[lineCats.Count - 1];
                 float distance = Vector2.Distance(hitCat.transform.position, pre.transform.position);
-
 
                 //画像で判定
                 bool isSameColor = hitCat.GetComponent<SpriteRenderer>().sprite == pre.GetComponent<SpriteRenderer>().sprite;
@@ -123,7 +129,7 @@ public class SamegameDirector : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetMouseButtonUp(0))//指を離したら
+        else if (Input.GetMouseButtonUp(0))//指を離したら
         {
             //削除されたアイテムをクリア
             cats.RemoveAll(item => item == null);
@@ -135,20 +141,8 @@ public class SamegameDirector : MonoBehaviour
             lineRenderer.positionCount = 0;
             lineCats.Clear();
         }
-
-        //ライン描画処理
-        if(lineCats.Count>1)
-        {
-            //頂点数
-            lineRenderer.positionCount = lineCats.Count;
-
-            //ラインのポジション
-            /*for(int i=0;i<lineCats.Count;i++)
-            {
-                lineRenderer.SetPosition(i, lineCats[i].transform.position + new Vector3(0,0,1));
-            }*/
-        }
     }
+
 
     //アイテムを生成する関数
     void SpawnItem(int count)
@@ -191,10 +185,10 @@ public class SamegameDirector : MonoBehaviour
             Destroy(item);
 
             //爆発エフェクト生成
-            //CatPoof =Instantiate(GetComponent<GameObject>());
+            Instantiate(CatPoof);
 
             //削除した分生成して、スコアを加算
-            SpawnItem(destroyItems.Count/3);
+            SpawnItem(destroyItems.Count/4);
             gameScore += destroyItems.Count * 10;
 
             //スコアの表示を更新

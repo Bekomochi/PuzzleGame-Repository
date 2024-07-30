@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -105883088589963596}
   - component: {fileID: -7403575191743861081}
   m_Layer: 0
-  m_Name: bubble_red
-  m_TagString: Untagged
+  m_Name: Brown-cat
+  m_TagString: pieces
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9730d21d29379024a9225972af199dd1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d784893ac073ce0438fe8b301f71c4e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3, y: 1.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

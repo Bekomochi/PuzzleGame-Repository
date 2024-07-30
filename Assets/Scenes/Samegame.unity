@@ -275,9 +275,9 @@ MonoBehaviour:
   - {fileID: 6330804145609180616, guid: c29722ba55118e34f83db0eeac284f9e, type: 3}
   - {fileID: 710476908316304903, guid: 1a2ea16e91e0b484792d0614e4b536e3, type: 3}
   - {fileID: 4488208156394302851, guid: dd8db38f6da46e547bd865c0559df7d0, type: 3}
-  - {fileID: 6656343870061944324, guid: 0a45ffe45e6a736498a17b2f09500254, type: 3}
+  - {fileID: 710476908316304903, guid: dd79fab2a18578743ab3951d2706ed66, type: 3}
   - {fileID: 4283308959322981880, guid: a60234c6394639042b9dd334ceb3b0a8, type: 3}
-  - {fileID: 5443439447187019095, guid: a5c23e8f345dbf34bb0abfc8817152b6, type: 3}
+  - {fileID: 4283308959322981880, guid: 56464de9479b802418c64270422348eb, type: 3}
   gameTimer: 60
   fielditemCountMax: 60
   deleteItemCount: 3
@@ -285,6 +285,7 @@ MonoBehaviour:
   timerText: {fileID: 2001479092}
   finishPanel: {fileID: 1875180490}
   retryButton: {fileID: 817728629}
+  CatPoof: {fileID: 9157105887711914197, guid: bf8a31b4c7c435d4abd07015f1de5771, type: 3}
   BublesSE: {fileID: 0}
   BGM: {fileID: 0}
 --- !u!1 &274602934
@@ -1084,7 +1085,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 1
 --- !u!114 &817728632
 MonoBehaviour:
   m_ObjectHideFlags: 0
