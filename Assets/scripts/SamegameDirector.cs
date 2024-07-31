@@ -90,8 +90,8 @@ public class SamegameDirector : MonoBehaviour
 
                 hitCat.transform.localScale = new Vector3(2, 2, 2);
             }
-
         }
+
         else if (Input.GetMouseButton(0))//押したままの状態
         {
             GameObject hitCat = GetHitCat(true);
@@ -123,6 +123,7 @@ public class SamegameDirector : MonoBehaviour
                 }
             }
         }
+
         else if (Input.GetMouseButtonUp(0))//指を離したら
         {
             //削除されたアイテムをクリア
@@ -143,9 +144,9 @@ public class SamegameDirector : MonoBehaviour
         //    lineRenderer.positionCount = lineCats.Count;
 
         //    //ラインのポジション
-        //    for(int i=0;i<lineCats.Count;i++)
+        //    for (int i = 0; i < lineCats.Count; i++)
         //    {
-        //        lineRenderer.SetPosition(i, lineCats[i].transform.position + new Vector3(0,0,1));
+        //        lineRenderer.SetPosition(i, lineCats[i].transform.position + new Vector3(0, 0, 1));
         //    }
         //}
     }
@@ -194,7 +195,7 @@ public class SamegameDirector : MonoBehaviour
             //CatPoof =Instantiate(GetComponent<GameObject>());
 
             //削除した分生成して、スコアを加算
-            SpawnItem(destroyItems.Count / 3);
+            SpawnItem(destroyItems.Count / 5);
             gameScore += destroyItems.Count * 10;
 
             //スコアの表示を更新
@@ -294,6 +295,11 @@ public class SamegameDirector : MonoBehaviour
             {
                 ret = raycastHit2D.collider.gameObject;
             }
+        }
+
+        if(ret!=null&&ret.tag!="cat")
+        {
+            ret = null;
         }
 
         return ret;
