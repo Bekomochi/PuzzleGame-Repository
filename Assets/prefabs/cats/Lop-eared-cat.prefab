@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7958589001020570276}
   - component: {fileID: 7689734759835312536}
   m_Layer: 0
-  m_Name: Lop-eared-cat
+  m_Name: lop-eared-cat
   m_TagString: pieces
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

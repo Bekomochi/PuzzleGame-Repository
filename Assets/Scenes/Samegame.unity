@@ -285,7 +285,6 @@ MonoBehaviour:
   timerText: {fileID: 2001479092}
   finishPanel: {fileID: 1875180490}
   retryButton: {fileID: 817728629}
-  CatPoof: {fileID: 9157105887711914197, guid: bf8a31b4c7c435d4abd07015f1de5771, type: 3}
   BublesSE: {fileID: 0}
   BGM: {fileID: 0}
 --- !u!1 &274602934
@@ -427,7 +426,7 @@ GameObject:
   - component: {fileID: 286492589}
   - component: {fileID: 286492590}
   m_Layer: 0
-  m_Name: wall(none) (1)
+  m_Name: wall(left-upper)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -639,7 +638,7 @@ GameObject:
   - component: {fileID: 327889791}
   - component: {fileID: 327889790}
   m_Layer: 0
-  m_Name: wall (left) (1)
+  m_Name: wall (right)
   m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1561,7 +1560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1434323595
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2010,7 +2009,7 @@ GameObject:
   - component: {fileID: 2002853254}
   - component: {fileID: 2002853255}
   m_Layer: 0
-  m_Name: wall(none)
+  m_Name: wall(right)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

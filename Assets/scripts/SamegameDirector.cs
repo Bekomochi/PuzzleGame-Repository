@@ -18,7 +18,7 @@ public class SamegameDirector : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;//ゲーム時間
     [SerializeField] GameObject finishPanel;//ゲーム終了時に出すパネル
     [SerializeField] GameObject retryButton;//ゲーム終了時に出すパネル
-    [SerializeField] GameObject CatPoof;//爆発エフェクト
+    //[SerializeField] GameObject CatPoof;//爆発エフェクト
 
     //bgm,seに関する変数
     [SerializeField] AudioClip BublesSE;//ネコを消した時の音
@@ -37,7 +37,6 @@ public class SamegameDirector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         /*全アイテム
          アイテムのプレハブが生成されるたびにリストに追加*/
         cats = new List<GameObject>();
@@ -75,13 +74,7 @@ public class SamegameDirector : MonoBehaviour
             return;
         }
 
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
         //タッチ開始から指を離すまで
-
-
         if (Input.GetMouseButtonDown(0))//タッチ開始
         {
             GameObject hitCat = GetHitCat(false);
@@ -116,6 +109,7 @@ public class SamegameDirector : MonoBehaviour
                 GameObject pre = lineCats[lineCats.Count - 1];
                 float distance = Vector2.Distance(hitCat.transform.position, pre.transform.position);
 
+
                 //画像で判定
                 bool isSameColor = hitCat.GetComponent<SpriteRenderer>().sprite == pre.GetComponent<SpriteRenderer>().sprite;
 
@@ -141,8 +135,20 @@ public class SamegameDirector : MonoBehaviour
             lineRenderer.positionCount = 0;
             lineCats.Clear();
         }
-    }
 
+        //ライン描画処理
+        //if (lineCats.Count > 1)
+        //{
+        //    //頂点数
+        //    lineRenderer.positionCount = lineCats.Count;
+
+        //    //ラインのポジション
+        //    for(int i=0;i<lineCats.Count;i++)
+        //    {
+        //        lineRenderer.SetPosition(i, lineCats[i].transform.position + new Vector3(0,0,1));
+        //    }
+        //}
+    }
 
     //アイテムを生成する関数
     void SpawnItem(int count)
@@ -185,10 +191,10 @@ public class SamegameDirector : MonoBehaviour
             Destroy(item);
 
             //爆発エフェクト生成
-            Instantiate(CatPoof);
+            //CatPoof =Instantiate(GetComponent<GameObject>());
 
             //削除した分生成して、スコアを加算
-            SpawnItem(destroyItems.Count/4);
+            SpawnItem(destroyItems.Count / 3);
             gameScore += destroyItems.Count * 10;
 
             //スコアの表示を更新
@@ -278,7 +284,7 @@ public class SamegameDirector : MonoBehaviour
         }
 
         //当たり判定があったら
-        if(raycastHit2D)
+        if (raycastHit2D)
         {
             //当たり判定があったオブジェクトからSpriteRendererを取得
             SpriteRenderer spriteRenderer = raycastHit2D.collider.gameObject.GetComponent<SpriteRenderer>();
